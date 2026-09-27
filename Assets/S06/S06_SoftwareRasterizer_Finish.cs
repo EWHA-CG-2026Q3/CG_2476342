@@ -23,6 +23,7 @@ public class S06_SoftwareRasterizer_Finish : MonoBehaviour
         vertexA = new Vector2(70, 220);
         vertexB = new Vector2(30, 50);
         vertexC = new Vector2(225, 90);
+        fillColor = new Color(0.3f, 0.8f, 1f, 1f);
 
         DrawTriangle(vertexA, vertexB, vertexC, fillColor);
 
