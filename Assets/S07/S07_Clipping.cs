@@ -39,6 +39,14 @@ public class S07_Clipping : MonoBehaviour
         // 클리핑 경계를 캔버스 여백만큼 안쪽으로 — 경계가 어디인지 눈으로 보기 위한 참고선
         DrawMarginOutline();
 
+        // 왼쪽과 위쪽 경계를 넘도록 꼭짓점 설계
+        polygon = new List<Vector2>
+        {
+        new Vector2(10, 100),
+        new Vector2(120, 250),
+        new Vector2(200, 80)
+        };
+
         List<Vector2> clipped = polygon;
         clipped = ClipLeft(clipped, clipMargin);
         clipped = ClipRight(clipped, canvasWidth - clipMargin);
@@ -161,9 +169,30 @@ public class S07_Clipping : MonoBehaviour
     // ── TODO: 위쪽 경계(y <= boundary)로 자르는 함수를 완성하세요 ──
     private List<Vector2> ClipTop(List<Vector2> input, float boundary)
     {
-        return input;
+        List<Vector2> output = new List<Vector2>();
 
-        // TODO: ClipRight와 같은 부등호 방향, 비교 축만 x → y로 바뀝니다.
+        for (int i = 0; i < input.Count; i++)
+        {
+            Vector2 current = input[i];
+            Vector2 previous = input[(i - 1 + input.Count) % input.Count];
+
+            bool currentInside = current.y <= boundary;
+            bool previousInside = previous.y <= boundary;
+
+            if (currentInside)
+            {
+                if (!previousInside)
+                    output.Add(GetIntersectionY(previous, current, boundary));
+
+                output.Add(current);
+            }
+            else if (previousInside)
+            {
+                output.Add(GetIntersectionY(previous, current, boundary));
+            }
+        }
+
+        return output;
     }
 
     // ── 참고 예시로 이미 완성되어 있음 ──────────────────────
