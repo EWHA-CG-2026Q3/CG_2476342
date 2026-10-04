@@ -45,6 +45,16 @@ public class S07_DepthTest2 : MonoBehaviour
             for (int y = 0; y < canvasHeight; y++)
                 depthBuffer[x, y] = float.MaxValue;
 
+        // 주황 삼각형은 깊이를 일정하게 설정
+        vertexA1.z = 0.5f;
+        vertexB1.z = 0.5f;
+        vertexC1.z = 0.5f;
+
+        // 파란 삼각형은 위쪽이 가깝고 아래쪽이 멀도록 설정
+        vertexA2.z = 0.1f;
+        vertexB2.z = 0.9f;
+        vertexC2.z = 0.9f;
+
         // TODO 0: 아래 세 줄의 순서를 원하는 대로 바꿔보세요.
         DrawTriangle(vertexA3, vertexB3, vertexC3, color3);
         DrawTriangle(vertexA2, vertexB2, vertexC2, color2);
