@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+[ExecuteAlways]
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class S13_DiamondMesh : MonoBehaviour
